@@ -1,5 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
+LOCAL_CFLAGS := -Os
 
 LOCAL_SRC_FILES := fssubs.c unicode_to_utf8.c devices.c utilsubs.c \
  super.c inode.c diskmap.c message.c uniupr.c jfs_endian.c \
@@ -9,10 +10,10 @@ LOCAL_SRC_FILES := fssubs.c unicode_to_utf8.c devices.c utilsubs.c \
 # fsckwsp.h inode.h libjufs.h message.h super.h unicode_to_utf8.h \
 # utilsubs.h jfs_endian.h logform.h logredo.h fsck_message.h
 
-LOCAL_MODULE := libfs
+LOCAL_MODULE := libsteam_fs
 LOCAL_MODULE_TAGS := eng
 
-LOCAL_C_INCLUDES := external/jfsutils external/jfsutils/include
+LOCAL_C_INCLUDES := bootable/steam/jfsutils bootable/steam/jfsutils/include
 
 LOCAL_CFLAGS := -Os -g -W -Wall \
 	-DHAVE_UNISTD_H \

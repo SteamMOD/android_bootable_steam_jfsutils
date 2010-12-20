@@ -61,7 +61,7 @@ void tune_usage(void)
 }
 
 /*--------------------------------------------------------------------
- * NAME: parse_journal_opts
+ * NAME: parse_journal_opts_j2
  *
  * FUNCTION: parse journal (-J) options
  *           set log file descriptor (global log_fd)
@@ -70,7 +70,7 @@ void tune_usage(void)
  * PARAMETERS:
  *      opts - options string
  */
-void parse_journal_opts(const char *opts)
+void parse_journal_opts_j2(const char *opts)
 {
 	int journal_usage = 0;
 	uuid_t log_uuid;
@@ -134,7 +134,7 @@ static void parse_tune_options(int argc, char *argv[])
 		switch (c) {
 		case 'J':
 			/* attach external journal device */
-			parse_journal_opts(optarg);
+			parse_journal_opts_j2(optarg);
 			J_flag = 1;
 			OpenMode = "r+";
 			break;
@@ -404,7 +404,7 @@ int main(int argc, char *argv[])
 			EXIT(fp, -1);
 		}
 
-		/* log_fd was set in parse_journal_opts */
+		/* log_fd was set in parse_journal_opts_j2 */
 		if (log_fd == NULL) {
 			printf("\nError: Could not find/open specified external journal device.\n");
 			EXIT(fp, -1);

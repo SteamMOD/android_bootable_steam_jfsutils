@@ -1,5 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
+LOCAL_CFLAGS := -Os
 
 LOCAL_SRC_FILES := \
 	clear.c \
@@ -14,10 +15,10 @@ LOCAL_SRC_FILES := \
 	uuid_time.c
 
 
-LOCAL_MODULE := libfs_uuid
+LOCAL_MODULE := libsteam_fs_uuid
 LOCAL_MODULE_TAGS:= eng
 
-LOCAL_C_INCLUDES := external/jfsutils
+LOCAL_C_INCLUDES := bootable/steam/jfsutils
 
 LOCAL_CFLAGS := -Os -g -W -Wall \
 	-DHAVE_INTTYPES_H \

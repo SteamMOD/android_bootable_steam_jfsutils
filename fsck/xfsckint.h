@@ -235,7 +235,7 @@ int close_volume(void);
 
 int default_volume(void);
 
-int dnode_get(int64_t, uint32_t, dtpage_t **);
+int dnode_get_jfs(int64_t, uint32_t, dtpage_t **);
 
 int ea_get(int64_t, uint32_t, char *, uint32_t *, uint32_t *, int64_t *);
 

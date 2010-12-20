@@ -545,7 +545,7 @@ static int create_aggregate(FILE *dev_ptr,
 }
 
 /*--------------------------------------------------------------------
- * NAME: parse_journal_opts
+ * NAME: parse_journal_opts_jfs
  *
  * FUNCTION: parse journal (-J) options
  *               set log device name (global logdev)
@@ -556,7 +556,7 @@ static int create_aggregate(FILE *dev_ptr,
  *      ext_journal_opt - external journal flag
  *      journal_device - external journal device name
  */
-void parse_journal_opts(const char *opts, int *ext_journal_opt,
+void parse_journal_opts_jfs(const char *opts, int *ext_journal_opt,
 			char *journal_device)
 {
 	int journal_usage = 0;
@@ -720,7 +720,7 @@ int main(int argc, char *argv[])
 				mkfs_usage();
 				return EINVAL;
 			} else {
-				parse_journal_opts(optarg, &ext_journal_opt,
+				parse_journal_opts_jfs(optarg, &ext_journal_opt,
 						   logdev);
 				j_selected = true;
 			}

@@ -1250,7 +1250,7 @@ int close_volume()
 }
 
 /*****************************************************************************
- * NAME: dnode_get
+ * NAME: dnode_get_jfs
  *
  * FUNCTION: Read the requested dnode page into and/or locate the requested
  *           dnode page in the fsck dnode buffer.
@@ -1267,7 +1267,7 @@ int close_volume()
  *      success: FSCK_OK
  *      failure: something else
  */
-int dnode_get(int64_t dnode_fsblk_offset, uint32_t dnode_length,
+int dnode_get_jfs(int64_t dnode_fsblk_offset, uint32_t dnode_length,
 	      dtpage_t ** addr_dtpage_ptr)
 {
 	int dnodg_rc = FSCK_OK;

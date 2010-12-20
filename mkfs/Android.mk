@@ -1,15 +1,19 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
+LOCAL_CFLAGS := -Os
 
 LOCAL_SRC_FILES := initmap.c inodemap.c inodes.c mkfs.c
 
-LOCAL_MODULE := mkfs.jfs
+LOCAL_MODULE := libsteam_mkfs_jfs
 LOCAL_MODULE_TAGS := eng
 
-LOCAL_STATIC_LIBRARIES := libfs libfs_uuid
+LOCAL_STATIC_LIBRARIES := libsteam_fs libsteam_fs_uuid
 
-LOCAL_C_INCLUDES := external/jfsutils external/jfsutils/include external/jfsutils/libfs external/jfsutils/uuid
+LOCAL_C_INCLUDES := bootable/steam/jfsutils \
+									  bootable/steam/jfsutils/include \
+										bootable/steam/jfsutils/libfs \
+										bootable/steam/jfsutils/uuid
 
 LOCAL_CFLAGS := -Os -g -W -Wall \
 	-DHAVE_DIRENT_H \
@@ -38,7 +42,8 @@ LOCAL_CFLAGS := -Os -g -W -Wall \
 	-DHAVE_TYPE_SSIZE_T \
 	-DHAVE_INTPTR_T \
 	-DENABLE_HTREE=1 \
-	-DONE_FILESET_PER_AGGR
+	-DONE_FILESET_PER_AGGR \
+	-Dmain=steam_mkfs_jfs_main
 
-include $(BUILD_EXECUTABLE)
+include $(BUILD_STATIC_LIBRARY)
 

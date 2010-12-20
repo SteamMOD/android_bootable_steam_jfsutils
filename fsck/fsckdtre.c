@@ -365,7 +365,7 @@ int direntry_get_objnam(uint32_t parent_inonum,
 				while ((dgon_rc == FSCK_OK) && (!entry_found)
 				       && (leaf_ptr->header.next != 0)) {
 					dgon_rc =
-					    dnode_get(leaf_ptr->header.next,
+					    dnode_get_jfs(leaf_ptr->header.next,
 						      BYTESPERPAGE, &leaf_ptr);
 					if (dgon_rc != FSCK_OK) {
 						/* this is fatal */
@@ -2860,7 +2860,7 @@ int dTree_processing(struct dinode *inoptr,
 		/* to avoid releasing it twice */
 		dtiptr->next_Qel = NULL;
 		is_root = 0;
-		dp_rc = dnode_get(dtiptr->this_Qel->node_addr, BYTESPERPAGE,
+		dp_rc = dnode_get_jfs(dtiptr->this_Qel->node_addr, BYTESPERPAGE,
 				  &dtiptr->dtp_ptr);
 		if (dp_rc != FSCK_OK) {
 			/* read failed */
@@ -3298,7 +3298,7 @@ int dTree_search(struct dinode *dir_inoptr,
 				node_addr = addressPXD(&(intentry->xd));
 				node_length = lengthPXD(&(intentry->xd));
 				ds_rc =
-				    dnode_get(node_addr, BYTESPERPAGE,
+				    dnode_get_jfs(node_addr, BYTESPERPAGE,
 					      &(dtiptr->dtp_ptr));
 				if (ds_rc == FSCK_OK) {
 					is_root = 0;
@@ -3533,7 +3533,7 @@ int find_first_dir_leaf(struct dinode *inoptr,
 		 */
 		first_child_addr = addressPXD(&(idtentry_ptr->xd));
 
-		ffdl_rc = dnode_get(first_child_addr, BYTESPERPAGE, &dtpg_ptr);
+		ffdl_rc = dnode_get_jfs(first_child_addr, BYTESPERPAGE, &dtpg_ptr);
 
 		while ((ffdl_rc == FSCK_OK) && (*leaf_agg_offset == 0)) {
 			if (dtpg_ptr->header.flag & BT_LEAF) {
@@ -3555,7 +3555,7 @@ int find_first_dir_leaf(struct dinode *inoptr,
 				first_child_addr =
 				    addressPXD(&(idtentry_ptr->xd));
 				ffdl_rc =
-				    dnode_get(first_child_addr, BYTESPERPAGE,
+				    dnode_get_jfs(first_child_addr, BYTESPERPAGE,
 					      &dtpg_ptr);
 			}
 		}
@@ -3657,7 +3657,7 @@ int process_valid_dir_data(struct dinode *inoptr,
 					 * Get the first node in the new level.
 					 */
 					pvdd_rc =
-					    dnode_get(first_child_addr,
+					    dnode_get_jfs(first_child_addr,
 						      BYTESPERPAGE,
 						      &dtpage_ptr);
 					if (pvdd_rc == FSCK_OK) {
@@ -3724,7 +3724,7 @@ int process_valid_dir_data(struct dinode *inoptr,
 								 * Get the next node in this level.
 								 */
 								pvdd_rc =
-								    dnode_get
+								    dnode_get_jfs
 								    (node_addr_fsblks,
 								     BYTESPERPAGE,
 								     &dtpage_ptr);
@@ -4105,7 +4105,7 @@ int rebuild_dir_index(struct dinode *inoptr,
 		if (current_Qel) {
 			inoptr->di_nblocks++;
 			addr = current_Qel->node_addr;
-			rc = dnode_get(addr, PSIZE, &dtree);
+			rc = dnode_get_jfs(addr, PSIZE, &dtree);
 			if (rc)
 				return rc;
 			stbl = (int8_t *)&dtree->slot[dtree->header.stblindex];
